@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/logos/logopolinema.png">
+  <title>
+    Sistem Tata Tertib
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+</head>
+
+<body class="g-sidenav-show   bg-gray-100">
+  <div class="min-height-300 bg-dark position-absolute w-100"></div>
+  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+    <div class="sidenav-header">
+      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0" href="dashboard.html" target="_blank">
+        <img src="../assets/img/logos/logopolinema.png" width="26px" height="26px" class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-1 font-weight-bold">Sistem Tata Tertib</span>
+      </a>
+    </div>
+    <hr class="horizontal dark mt-0">
+    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+      <ul class="navbar-nav">
+        <!-- Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link active" href="dashboard-dosen.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tv-2 text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+  
+        <!-- sanksi(semua aktor dapat mengakses) -->
+        <li class="nav-item">
+          <a class="nav-link" href="tata-tertib.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-document-text text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Tata Tertib</span>
+          </a>
+        </li>
+  
+        <!-- Sanksi (semua aktor dapat mengakses) -->
+        <li class="nav-item">
+          <a class="nav-link" href="sanksi-dosen.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-warning text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sanksi</span>
+          </a>
+        </li>
+  
+        <!-- Laporan Pelanggaran (Dosen dan Admin dapat melaporkan pelanggaran) -->
+        <li class="nav-item">
+          <a class="nav-link" href="laporan-pelanggaran.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-bell text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Laporan Pelanggaran</span>
+          </a>
+        </li>
+
+<!-- Logout (Admin) -->
+<li class="nav-item">
+  <a class="nav-link" href="logout.html">
+    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+      <i class="ni ni-user-run text-dark text-sm opacity-10"></i>
+    </div>
+    <span class="nav-link-text ms-1">Logout</span>
+  </a>
+</li>
+</ul>
+</div>
+</aside>
+
+
+  <!-- Main content -->
+  <main class="main-content position-relative border-radius-lg">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
+      <div class="container-fluid py-1 px-3">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Laporan Pelaggaran</li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0">Sistem Tata Tertib - Laporan Pelaggaran</h6>
+        </nav>
+        <!-- Navbar content -->
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group">
+              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+              <input type="text" class="form-control" placeholder="Cari sanksiatau Laporan...">
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <style>
+      .report-display {
+        margin-top: 30px;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: #e9ecef;
+      }
+      
+      .proof-img {
+        max-width: 200px;
+        max-height: 200px;
+        object-fit: cover;
+      }
+  
+      .verified {
+        color: green;
+        font-weight: bold;
+      }
+  
+      .rejected {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  
+  <body class="bg-light">
+    <div class="container mt-5">
+      <h3 class="text-center">Laporan Pelanggaran</h3>
+  
+      <!-- Laporan Pelanggaran -->
+      <div id="reportDisplay" class="report-display">
+        <!-- Konten laporan akan dimuat secara dinamis di sini -->
+      </div>      
+    </div>
+
+    <div class="modal fade" id="proofModal" tabindex="-1" aria-labelledby="proofModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="proofModalLabel">Bukti Pelanggaran</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center">
+            <img id="proofImage" src="" alt="Bukti Pelanggaran" class="img-fluid" style="max-height: 500px;">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  
+    <script>
+      async function fetchReports() {
+    try {
+        // Mengambil data dari endpoint PHP
+        const response = await fetch('../backend/get_report.php');
+        if (!response.ok) throw new Error('Gagal mengambil laporan dari server');
+        const reports = await response.json();
+
+        // Target elemen untuk menampilkan laporan
+        const reportDisplay = document.getElementById('reportDisplay');
+        reportDisplay.innerHTML = ''; // Kosongkan konten sebelumnya
+
+        // Loop melalui data laporan dan tambahkan ke halaman
+        reports.forEach(report => {
+            const reportHTML = `
+                <div class="report-display mb-4">
+                    <h5>Laporan Pelanggaran</h5>
+                    <p><strong>Nama:</strong> ${report.nama}</p>
+                    <p><strong>Tanggal Pelanggaran:</strong> ${new Date(report.tanggal_pelanggaran).toLocaleDateString()}</p>
+                    <p><strong>Deskripsi:</strong> ${report.deskripsi}</p>
+                    <p><strong>Bukti Foto:</strong> ${report.bukti ? `<img class="proof-img" src="uploads/${report.bukti}" alt="Bukti Foto">` : 'Tidak ada bukti'}</p>
+                    <p><strong>Status:</strong> <span id="status-${report.id}" class="${report.status === 'verified' ? 'verified' : report.status === 'rejected' ? 'rejected' : ''}">${report.status}</span></p>
+                    ${report.bukti ? `<button class="btn btn-info" onclick="previewProof('../uploads/${report.bukti}')">Lihat Bukti</button>` : ''}
+                    <button class="btn btn-success" onclick="verifyReport(${report.id})">Verifikasi Laporan</button>
+                    <button class="btn btn-danger" onclick="rejectReport(${report.id})">Tolak Laporan</button>
+                </div>
+            `;
+            reportDisplay.innerHTML += reportHTML;
+        });
+
+
+    } catch (error) {
+        console.error('Gagal mengambil laporan:', error);
+        document.getElementById('reportDisplay').innerHTML = '<p class="text-danger">Gagal memuat laporan pelanggaran.</p>';
+    }
+}
+
+// Fungsi untuk memperbarui status laporan
+function updateStatus(id, status) {
+    const data = new FormData();
+    data.append('id', id);
+    data.append('status', status);
+
+    // Kirim permintaan POST ke PHP
+    fetch('../backend/update_report.php', {
+        method: 'POST',
+        body: data
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.message) {
+            alert('Status berhasil diperbarui');
+            // Setelah status diperbarui, perbarui tampilan status di halaman
+            const statusElement = document.querySelector(`#status-${id}`);
+            statusElement.textContent = status;
+            statusElement.className = status === 'verified' ? 'verified' : 'rejected';
+        } else {
+            alert('Gagal memperbarui status');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan saat memperbarui status');
+    });
+}
+
+// Event listener untuk tombol Verifikasi
+function verifyReport(id) {
+    updateStatus(id, 'verified');
+}
+
+// Event listener untuk tombol Tolak
+function rejectReport(id) {
+    updateStatus(id, 'rejected');
+}
+
+  
+  function previewProof(imagePath) {
+    const proofImage = document.getElementById('proofImage');
+    proofImage.src = imagePath; // Path gambar yang diklik
+    const proofModal = new bootstrap.Modal(document.getElementById('proofModal'));
+    proofModal.show();
+}
+
+
+  // Panggil fungsi fetchReports() setelah halaman selesai dimuat
+document.addEventListener("DOMContentLoaded", fetchReports);
+
+    </script>
+
+
+    <!-- Scripts -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+</body>
+
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/logos/logopolinema.png">
+  <title>
+    Sistem Tata Tertib
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <script>    
+    document.getElementById("reportForm").addEventListener("submit", async function(event) {
+    event.preventDefault(); // Mencegah reload halaman
+
+    const formData = new FormData(this);
+
+    try {
+      const response = await fetch(this.action, {
+        method: "POST",
+        body: formData
+      });
+
+      const result = await response.json(); // Parsing JSON dari respons
+      if (response.ok && result.status === "success") {
+        // Tampilkan data yang dikirim
+        document.getElementById("displayName").textContent = result.data.name;
+        document.getElementById("displayDate").textContent = result.data.date;
+        document.getElementById("displayDescription").textContent = result.data.description;
+        const proofURL = `../uploads/${result.data.proof}`; // URL file bukti
+        document.getElementById("displayProof").src = proofURL;
+
+        document.getElementById("reportDisplay").style.display = "block"; // Tampilkan area laporan
+        alert(result.message); // Notifikasi sukses
+      } else {
+        alert("Gagal mengirim laporan. Pesan: " + result.message);
+      }
+    } catch (error) {
+      alert("Terjadi kesalahan saat mengirim laporan: " + error.message);
+    }
+  });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+      const descriptionDropdown = document.getElementById("description");
+    
+      try {
+        const response = await fetch('../backend/get_tatib_deskripsi.php'); // Sesuaikan path ke endpoint
+        const result = await response.json();
+    
+        if (response.ok && result.status === "success") {
+          result.data.forEach(deskripsi_pelanggaran => {
+            const option = document.createElement("option");
+            option.value = deskripsi_pelanggaran; // Simpan teks deskripsi sebagai value
+            option.textContent = deskripsi_pelanggaran; // Tampilkan teks deskripsi di dropdown
+            descriptionDropdown.appendChild(option);
+          });
+        } else {
+          console.error("Gagal memuat data tata tertib:", result.message);
+        }
+      } catch (error) {
+        console.error("Terjadi kesalahan:", error);
+      }
+    });
+    </script>    
+  <style>
+    body {
+      background-color: #f0f8ff;
+    }
+
+    #description {
+      display: block;
+      max-height: 150px; /* Batasi tinggi dropdown */
+      overflow-y: auto; /* Aktifkan scroll vertikal */
+      width: 100%; /* Sesuaikan dengan lebar */
+    }
+
+    .report-form {
+      margin-top: 50px;
+      padding: 20px;
+      border-radius: 15px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .report-form h4 {
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      border-radius: 10px;
+    }
+
+    .btn {
+      border-radius: 20px;
+    }
+
+    .report-display {
+      margin-top: 30px;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #e9ecef;
+    }
+
+    .proof-img {
+      max-width: 200px;
+      max-height: 200px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body class="g-sidenav-show   bg-gray-100">
+  <div class="min-height-300 bg-dark position-absolute w-100"></div>
+  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+    <div class="sidenav-header">
+      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+      <a class="navbar-brand m-0" href="dashboard.html" target="_blank">
+        <img src="../assets/img/logos/logopolinema.png" width="26px" height="26px" class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-1 font-weight-bold">Sistem Tata Tertib</span>
+      </a>
+    </div>
+    <hr class="horizontal dark mt-0">
+    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+      <ul class="navbar-nav">
+        <!-- Dashboard -->
+        <li class="nav-item">
+          <a class="nav-link active" href="dashboard_dosen.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tv-2 text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+  
+        <!-- sanksi(semua aktor dapat mengakses) -->
+        <li class="nav-item">
+          <a class="nav-link" href="tata-tertib-dosen.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-document-text text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Tata Tertib</span>
+          </a>
+        </li>
+  
+        <!-- Sanksi (semua aktor dapat mengakses) -->
+        <li class="nav-item">
+          <a class="nav-link" href="sanksi-dosen.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-warning text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sanksi</span>
+          </a>
+        </li>
+  
+        <!-- Laporan Pelanggaran (Dosen dapat melaporkan pelanggaran) -->
+        <li class="nav-item">
+          <a class="nav-link" href="laporkan-pelanggaran.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-bell text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Laporkan Pelanggaran</span>
+          </a>
+        </li>
+  
+
+
+        <!-- Logout (Admin) -->
+        <li class="nav-item">
+          <a class="nav-link" href="logout.html">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-user-run text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Logout</span>
+          </a>
+        </li>
+        </ul>
+        </div>
+        </aside>
+
+
+        <!-- Main content -->
+        <main class="main-content position-relative border-radius-lg">
+          <!-- Navbar -->
+          <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
+            <div class="container-fluid py-1 px-3">
+              <!-- Breadcrumb -->
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                  <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+                  <li class="breadcrumb-item text-sm text-white active" aria-current="page">Laporan Statistik</li>
+                </ol>
+                <h6 class="font-weight-bolder text-white mb-0">Sistem Tata Tertib - Laporan Statistik</h6>
+              </nav>
+              <!-- Navbar content -->
+              <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                  <div class="input-group">
+                    <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" placeholder="Cari sanksiatau Laporan...">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        
+        <!-- End Navbar -->
+        <div class="container-fluid py-4">
+          <div class="row">
+            
+          <!-- Form Laporan -->
+          <div class="container report-form">
+            <h4>LAPORKAN PELANGGARAN</h4>
+            <form id="reportForm" action="../backend/upload.php" method="POST" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="name">Nama:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama" required>
+              </div>
+              <div class="form-group">
+                <label for="date">Tanggal Pelanggaran:</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+              </div>
+              <div class="form-group">
+                <label for="description">Deskripsi Pelanggaran:</label>
+                <select class="form-control" id="description" name="description" required>
+                  <option value="">Pilih Deskripsi Pelanggaran</option>
+                </select>
+              </div>                        
+              <div class="form-group">
+                <label for="proof">Bukti Foto:</label>
+                <input type="file" class="form-control-file" id="proof" name="proof" accept="image/*" required>
+              </div>
+              <button type="submit" class="btn btn-danger btn-block mt-3">Kirim Laporan</button>
+            </form>
+          </div>
+
+          <!-- Area untuk menampilkan laporan -->
+          <div id="reportDisplay" class="container report-display" style="display: none;">
+            <h5>Laporan Pelanggaran yang Dikirim</h5>
+            <p><strong>Nama:</strong> <span id="displayName"></span></p>
+            <p><strong>Tanggal Pelanggaran:</strong> <span id="displayDate"></span></p>
+            <p><strong>Deskripsi:</strong> <span id="displayDescription"></span></p>
+            <p><strong>Bukti Foto:</strong> <img id="displayProof" class="proof-img" src="" alt="Bukti Foto"></p>
+          </div> 
+        </body>
+</html>

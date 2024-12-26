@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Masuk</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f0f8ff;
+    }
+
+    .card {
+      border-radius: 15px;
+    }
+
+    .form-control {
+      border-radius: 10px;
+    }
+
+    .btn {
+      border-radius: 20px;
+    }
+
+    .logo {
+      width: 100px;
+      height: auto;
+      margin: 20px 0;
+    }
+    
+    .success-message {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #e3f2fd;
+      color: #000000;
+      padding: 30px;
+      border-radius: 10px;
+      font-size: 20px;
+      z-index: 9999;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="alert alert-primary text-center" role="alert">
+          <strong>SISTEM TATA TERTIB</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container text-center">
+    <img src="../assets/img/logos/logopolinema.png" alt="Logo" class="logo">
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mt-3">
+          <div class="card-header">
+            <h4 class="text-center">Masuk</h4>
+          </div>
+          <div class="card-body">
+            <form id="signInForm">
+              <div class="form-group">
+                <input type="email" name="email" class="form-control" placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="Kata Sandi" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block mt-4">Masuk</button>
+            </form>
+          </div>
+          <div class="card-footer text-center">
+            <p>Lupa kata sandi? <a href="ubah_password.html">Ubah Password</a></p>
+          </div>        
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="success-message" id="successMessage">Halo, Anda berhasil masuk!</div>
+
+  <script>
+    document.getElementById('signInForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const email = this.email.value;
+      const password = this.password.value;
+
+      try {
+        const response = await fetch('http://localhost/PBL/backend/login.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+        console.log(data); // Debug log untuk melihat data response dari server
+
+        if (response.ok) {
+          alert(data.message);
+          localStorage.setItem('loggedIn', 'true'); // Menyimpan status login
+          localStorage.setItem('role', data.role); // Simpan role di localStorage
+
+          // Alihkan berdasarkan role yang diterima
+          if (data.role === 'admin') {
+            window.location.href = 'dashboard.html';
+          } else if (data.role === 'mahasiswa') {
+            window.location.href = 'dashboard_mahasiswa.html';
+          } else if (data.role === 'dosen') {
+            window.location.href = 'dashboard_dosen.html';
+          }
+        } else {
+          alert(data.message); // Tampilkan pesan jika login gagal
+        }
+      } catch (error) {
+        console.error(error);
+        alert('Terjadi kesalahan pada server.');
+      }
+    });
+  </script>
+</body>
+</html>

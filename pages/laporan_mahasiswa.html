@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Laporan Pelanggaran Mahasiswa</title>
+  <!-- Argon Dashboard CSS -->
+  <link href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+  <!-- Side Nav -->
+  <div class="main-content">
+    <!-- Navbar -->
+    <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-light">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav align-items-center ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="laporan-mahasiswa.html">
+                <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                <span class="ms-1">Laporan Saya</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col">
+          <div class="card shadow-sm">
+            <div class="card-header">
+              <h3 class="text-center">Laporan Pelanggaran Mahasiswa</h3>
+            </div>
+            <div class="card-body" id="verifiedReportsDisplay">
+              <!-- Konten laporan yang sudah diverifikasi akan dimuat di sini -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <style>
+    .report-display {
+      margin-top: 30px;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #f8f9fe;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .proof-img {
+      max-width: 200px;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .report-display h5 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #343a40;
+    }
+
+    .report-display p {
+      font-size: 16px;
+      color: #495057;
+    }
+
+    .text-danger {
+      color: #e74a3b;
+    }
+  </style>
+
+  <script>
+
+    // Fungsi untuk mengambil laporan yang sudah diverifikasi
+    async function fetchVerifiedReports() {
+    try {
+        const response = await fetch('../backend/get_verified_report.php');
+        if (!response.ok) throw new Error('Gagal mengambil laporan dari server');
+        const verifiedReports = await response.json();
+
+        // Target elemen untuk menampilkan laporan
+        const verifiedReportsDisplay = document.getElementById('verifiedReportsDisplay');
+        verifiedReportsDisplay.innerHTML = ''; // Kosongkan konten sebelumnya
+
+        // Loop melalui data laporan dan tambahkan ke halaman
+        verifiedReports.forEach(report => {
+        const reportHTML = `
+            <div class="report-display mb-4">
+            <h5>Laporan Pelanggaran</h5>
+            <p><strong>Nama:</strong> ${report.nama}</p>
+            <p><strong>Tanggal Pelanggaran:</strong> ${new Date(report.tanggal_pelanggaran).toLocaleDateString()}</p>
+            <p><strong>Deskripsi:</strong> ${report.deskripsi}</p>
+            <p><strong>Bukti Foto:</strong> ${report.bukti ? `<img class="proof-img" src="uploads/${report.bukti}" alt="Bukti Foto">` : 'Tidak ada bukti'}</p>
+            </div>
+        `;
+        verifiedReportsDisplay.innerHTML += reportHTML;
+        });
+    } catch (error) {
+        console.error('Gagal mengambil laporan:', error);
+        document.getElementById('verifiedReportsDisplay').innerHTML = '<p class="text-danger">Gagal memuat laporan pelanggaran.</p>';
+    }
+    }
+
+    // Panggil fungsi fetchVerifiedReports() setelah halaman selesai dimuat
+    document.addEventListener("DOMContentLoaded", fetchVerifiedReports);
+
+  </script>
+
+  <!-- Argon Dashboard Scripts -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>Logout - Sistem Sanksi</title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <style>
+    /* Menyesuaikan background dengan halaman sign-in */
+    body {
+      background: url("../assets/img/bg-signin.jpg") no-repeat center center fixed;
+      background-size: cover;
+      height: 100vh;
+    }
+    .card {
+      background-color: rgba(255, 255, 255, 0.8); /* Membuat card sedikit transparan */
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .btn-yes {
+      background-color: #007bff; /* Biru untuk tombol Yes */
+      color: white;
+    }
+    .btn-no {
+      background-color: #dc3545; /* Merah untuk tombol No */
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card p-5">
+      <h3 class="text-center">Apakah Anda yakin akan keluar?</h3>
+      <div class="mt-4 d-flex justify-content-center">
+        <button class="btn btn-yes me-3" onclick="logoutConfirm()">Yes</button>
+        <a href="dashboard.html" class="btn btn-no">No</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function logoutConfirm() {
+      // Menghapus status login dari localStorage
+      localStorage.removeItem('loggedIn');
+      
+      // Redirect ke halaman sign-in setelah logout
+      window.location.href = 'sign-in.html';
+    }
+  </script>
+</body>
+
+</html>
