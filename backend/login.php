@@ -1,5 +1,4 @@
 <?php
-
 session_start(); // Memulai session untuk melacak status login
 header("Content-Type: application/json");
 require 'db.php';
@@ -13,17 +12,17 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 }
 
 // Validasi input JSON
-if (!isset($data['email']) || !isset($data['password'])) {
-    echo json_encode(["message" => "Email dan password diperlukan!"]);
+if (!isset($data['NIM']) || !isset($data['password'])) {
+    echo json_encode(["message" => "Nomor Induk dan password diperlukan!"]);
     exit;
 }
 
-$email = $data['email'];
+$NIM = $data['NIM'];
 $password = $data['password'];
 
 // Query untuk memeriksa email di database
-$query = "SELECT * FROM users WHERE email = ?";
-$params = array($email);
+$query = "SELECT * FROM users WHERE NIM = ?";
+$params = array($NIM);
 $stmt = sqlsrv_query($conn, $query, $params);
 
 if ($stmt === false) {
@@ -36,7 +35,7 @@ if ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     // Verifikasi password
     if (password_verify($password, $row['password'])) {
         // Menyimpan session login dan role pengguna
-        $_SESSION['email'] = $email;
+        $_SESSION['NIM'] = $NIM;
         $_SESSION['role'] = $row['role'];
         
         echo json_encode([
@@ -49,7 +48,7 @@ if ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     }
 } else {
     // Jika email tidak ditemukan
-    echo json_encode(["message" => "Email tidak ditemukan!"]);
+    echo json_encode(["message" => "Nomor Induk tidak ditemukan!"]);
 }
 
 // Menutup statement dan koneksi

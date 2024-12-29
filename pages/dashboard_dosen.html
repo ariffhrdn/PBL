@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/logos/logopolinema.png">
   <title>
-    Argon Dashboard 3 by Creative Tim
+    Dashboard Dosen - Sistem Tata Tertib
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -18,6 +18,78 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <style>
+    /* Gaya untuk Kotak Kalender */
+    .calendar-box {
+      background-color: #f8f9fa; /* Warna latar abu-abu terang */
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    .calendar-box h5 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #343a40; /* Warna teks gelap */
+    }
+  
+    /* Gaya untuk kotak bulan */
+    .month-box {
+      display: inline-block;
+      background-color: #007bff; /* Warna latar biru */
+      color: white; /* Warna teks putih */
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+  
+    #calendar {
+      font-family: 'Open Sans', sans-serif;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+  
+    #calendar div {
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+  
+    #calendar .day-header {
+      font-weight: bold;
+      background-color: #0056b3;
+    }
+  
+    #calendar .today {
+      background-color: #ffc107;
+      color: #343a40;
+    }
+  
+    /* Menambahkan gaya untuk kotak Selamat Datang */
+    .welcome-box {
+      background-color: #007bff; /* Warna biru */
+      color: white; /* Warna teks putih */
+      border-radius: 10px;
+      padding: 50px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    .welcome-box p {
+      font-size: 32px; /* Ukuran font lebih besar */
+      font-weight: bold;
+      margin: 0;
+    }
+  </style>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -111,7 +183,7 @@
           </div>
       
     <div class="container-fluid py-4">
-      <div class="row">
+      <body class="row">
      <!-- Kotak Selamat Datang -->
 <div class="welcome-box">
     <p>Selamat Datang!</p>
@@ -128,62 +200,6 @@
     </div>
   </div>
   
-  <style>
-    /* Gaya untuk Kotak Kalender */
-    .calendar-box {
-      background-color: #f8f9fa; /* Warna latar abu-abu terang */
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-  
-    .calendar-box h5 {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      color: #343a40; /* Warna teks gelap */
-    }
-  
-    /* Gaya untuk kotak bulan */
-    .month-box {
-      display: inline-block;
-      background-color: #007bff; /* Warna latar biru */
-      color: white; /* Warna teks putih */
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-  
-    #calendar {
-      font-family: 'Open Sans', sans-serif;
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      margin-top: 20px;
-    }
-  
-    #calendar div {
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      text-align: center;
-      border-radius: 5px;
-      font-size: 14px;
-    }
-  
-    #calendar .day-header {
-      font-weight: bold;
-      background-color: #0056b3;
-    }
-  
-    #calendar .today {
-      background-color: #ffc107;
-      color: #343a40;
-    }
-  </style>
   
   <script>
     // JavaScript untuk Mengisi Kalender
@@ -215,24 +231,6 @@
       }
     });
   </script>
-  
-   
-  <style>
-    /* Menambahkan gaya untuk kotak Selamat Datang */
-    .welcome-box {
-      background-color: #007bff; /* Warna biru */
-      color: white; /* Warna teks putih */
-      border-radius: 10px;
-      padding: 50px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-  
-    .welcome-box p {
-      font-size: 32px; /* Ukuran font lebih besar */
-      font-weight: bold;
-      margin: 0;
-    }
-  </style>
+</body>
   
 </html>

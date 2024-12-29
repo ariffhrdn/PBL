@@ -4,12 +4,17 @@ include 'db.php';
 
 // Ambil ID pengguna (mahasiswa) dari session
 session_start();
-$mahasiswa_id = $_SESSION['user_id']; // Asumsi ID mahasiswa disimpan di session
+if (!isset($_SESSION['NIM'])) {
+    http_response_code(401); // Unauthorized
+    echo json_encode(["error" => "Anda belum login!"]);
+    exit;
+}
+$NIM = $_SESSION['NIM']; // Asumsi ID mahasiswa disimpan di session
 
 // Query untuk mengambil laporan yang sudah diverifikasi oleh mahasiswa tertentu
-$sql = "SELECT id, name, date, description, proof, status FROM laporan_pelanggaran WHERE status = 'verified' AND mahasiswa_id = ?";
+$sql = "SELECT id, NIM, name, date, description, proof, status FROM laporan_pelanggaran WHERE status = 'verified' AND NIM = ?";
 
-$params = array($mahasiswa_id);
+$params = array($NIM);
 $stmt = sqlsrv_query($conn, $sql, $params);
 
 if ($stmt === false) {
@@ -24,9 +29,10 @@ $reports = [];
 while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     $reports[] = [
         'id' => $row['id'],
+        'NIM' => $row['NIM'],
         'nama' => $row['name'],
-        'tanggal_pelanggaran' => $row['date']->format('Y-m-d'),
-        'deskripsi' => $row['description'],
+        'tanggal_pelanggaran' => isset($row['date']) ? $row['date']->format('Y-m-d') : null,
+        'deskripsi_pelanggaran' => $row['description'],
         'bukti' => $row['proof'] ?? null,
     ];
 }

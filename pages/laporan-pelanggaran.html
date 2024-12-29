@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/logos/logopolinema.png">
   <title>
-    Sistem Tata Tertib
+    Daftar Pelanggaran - Sistem Tata Tertib
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -180,6 +180,7 @@
             const reportHTML = `
                 <div class="report-display mb-4">
                     <h5>Laporan Pelanggaran</h5>
+                    <p><strong>Nomor Induk:</strong> ${report.NIM}</p>
                     <p><strong>Nama:</strong> ${report.nama}</p>
                     <p><strong>Tanggal Pelanggaran:</strong> ${new Date(report.tanggal_pelanggaran).toLocaleDateString()}</p>
                     <p><strong>Deskripsi:</strong> ${report.deskripsi}</p>

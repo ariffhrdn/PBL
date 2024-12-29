@@ -9,7 +9,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
 require 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
+    $email = $_POST['NIM'];
     $password = $_POST['password'];
     $role = $_POST['role'];
 
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Query untuk menambahkan pengguna baru
-    $query = "INSERT INTO users (email, password, role) VALUES (?, ?, ?)";
+    $query = "INSERT INTO users (NIM, password, role) VALUES (?, ?, ?)";
     $params = array($email, $hashedPassword, $role);
 
     $stmt = sqlsrv_query($conn, $query, $params);

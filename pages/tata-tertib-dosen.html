@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/logos/logopolinema.png">
   <title>
-    Sistem Tata Tertib
+    Daftar Tata Tertib - Sistem Tata Tertib
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -18,37 +18,7 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
-  <script>
-    document.addEventListener('DOMContentLoaded', loadTataTertibFromDatabase);
-
-    function loadTataTertibFromDatabase() {
-        const daftarTableBody = document.getElementById("daftar-tata-tertib-body");
-        daftarTableBody.innerHTML = ''; // Clear tabel sebelum memuat data
-
-        // Ambil data dari file PHP
-        fetch('../backend/get_tata_tertib.php')
-            .then(response => response.json())
-            .then(data => {
-                data.forEach((tataTertib, index) => {
-                    const newDaftarRow = document.createElement("tr");
-                    newDaftarRow.innerHTML = `
-                        <td>${index + 1}</td>
-                        <td>${tataTertib.deskripsi_pelanggaran}</td>
-                        <td>${tataTertib.tingkat_pelanggaran}</td>
-                    `;
-                    daftarTableBody.appendChild(newDaftarRow);
-                });
-            })
-            .catch(error => {
-                console.error("Error fetching tata tertib data: ", error);
-            });
-    }
-
-</script>
-    <!-- Scripts --> 
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+  
   <style>
     table {
   width: 100%;
@@ -227,5 +197,4 @@ th:nth-child(4), td:nth-child(4) {
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
 </body>
-  
   </html>

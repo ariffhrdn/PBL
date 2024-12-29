@@ -3,7 +3,7 @@
 include 'db.php';
 
 // Query untuk mengambil data laporan pelanggaran termasuk status
-$sql = "SELECT TOP 5 id, name, date, description, proof, status FROM laporan_pelanggaran";
+$sql = "SELECT TOP 5 id, NIM, name, date, description, proof, status FROM laporan_pelanggaran WHERE status = 'pending'";
 $stmt = sqlsrv_query($conn, $sql);
 
 if ($stmt === false) {
@@ -17,6 +17,7 @@ $reports = [];
 // Loop melalui hasil query dan masukkan ke dalam array
 while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     $reports[] = [
+        'NIM' => $row['NIM'],
         'id' => $row['id'],
         'nama' => $row['name'],
         'tanggal_pelanggaran' => $row['date']->format('Y-m-d'),

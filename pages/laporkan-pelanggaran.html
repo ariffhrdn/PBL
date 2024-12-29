@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/logos/logopolinema.png">
   <title>
-    Sistem Tata Tertib
+    Laporkan Pelanggaran - Sistem Tata Tertib
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -18,60 +18,7 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
-  <script>    
-    document.getElementById("reportForm").addEventListener("submit", async function(event) {
-    event.preventDefault(); // Mencegah reload halaman
-
-    const formData = new FormData(this);
-
-    try {
-      const response = await fetch(this.action, {
-        method: "POST",
-        body: formData
-      });
-
-      const result = await response.json(); // Parsing JSON dari respons
-      if (response.ok && result.status === "success") {
-        // Tampilkan data yang dikirim
-        document.getElementById("displayName").textContent = result.data.name;
-        document.getElementById("displayDate").textContent = result.data.date;
-        document.getElementById("displayDescription").textContent = result.data.description;
-        const proofURL = `../uploads/${result.data.proof}`; // URL file bukti
-        document.getElementById("displayProof").src = proofURL;
-
-        document.getElementById("reportDisplay").style.display = "block"; // Tampilkan area laporan
-        alert(result.message); // Notifikasi sukses
-      } else {
-        alert("Gagal mengirim laporan. Pesan: " + result.message);
-      }
-    } catch (error) {
-      alert("Terjadi kesalahan saat mengirim laporan: " + error.message);
-    }
-  });
-  </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", async function () {
-      const descriptionDropdown = document.getElementById("description");
-    
-      try {
-        const response = await fetch('../backend/get_tatib_deskripsi.php'); // Sesuaikan path ke endpoint
-        const result = await response.json();
-    
-        if (response.ok && result.status === "success") {
-          result.data.forEach(deskripsi_pelanggaran => {
-            const option = document.createElement("option");
-            option.value = deskripsi_pelanggaran; // Simpan teks deskripsi sebagai value
-            option.textContent = deskripsi_pelanggaran; // Tampilkan teks deskripsi di dropdown
-            descriptionDropdown.appendChild(option);
-          });
-        } else {
-          console.error("Gagal memuat data tata tertib:", result.message);
-        }
-      } catch (error) {
-        console.error("Terjadi kesalahan:", error);
-      }
-    });
-    </script>    
+  
   <style>
     body {
       background-color: #f0f8ff;
@@ -219,40 +166,103 @@
         <!-- End Navbar -->
         <div class="container-fluid py-4">
           <div class="row">
-            
-          <!-- Form Laporan -->
-          <div class="container report-form">
-            <h4>LAPORKAN PELANGGARAN</h4>
-            <form id="reportForm" action="../backend/upload.php" method="POST" enctype="multipart/form-data">
-              <div class="form-group">
-                <label for="name">Nama:</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama" required>
-              </div>
-              <div class="form-group">
-                <label for="date">Tanggal Pelanggaran:</label>
-                <input type="date" class="form-control" id="date" name="date" required>
-              </div>
-              <div class="form-group">
-                <label for="description">Deskripsi Pelanggaran:</label>
-                <select class="form-control" id="description" name="description" required>
-                  <option value="">Pilih Deskripsi Pelanggaran</option>
-                </select>
-              </div>                        
-              <div class="form-group">
-                <label for="proof">Bukti Foto:</label>
-                <input type="file" class="form-control-file" id="proof" name="proof" accept="image/*" required>
-              </div>
-              <button type="submit" class="btn btn-danger btn-block mt-3">Kirim Laporan</button>
-            </form>
-          </div>
+  
+        <!-- Form Laporan -->
+        <div class="container report-form">
+          <h4>LAPORKAN PELANGGARAN</h4>
+          <form id="reportForm" action="../backend/upload.php" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="NIM">Nomor Induk:</label>
+              <input type="text" class="form-control" id="NIM" name="NIM" placeholder="Masukkan Nomor Induk" required>
+            </div>
+            <div class="form-group">
+              <label for="name">Nama:</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama" required>
+            </div>
+            <div class="form-group">
+              <label for="date">Tanggal Pelanggaran:</label>
+              <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="deskripsi_pelanggaran">Deskripsi Pelanggaran:</label>
+              <select class="form-control" id="deskripsi_pelanggaran" name="deskripsi_pelanggaran" required>
+                <option value="">Pilih Deskripsi Pelanggaran</option>
+              </select>
+            </div>                        
+            <div class="form-group">
+              <label for="proof">Bukti Foto:</label>
+              <input type="file" class="form-control-file" id="proof" name="proof" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn btn-danger btn-block mt-3">Kirim Laporan</button>
+          </form>
+        </div>
 
-          <!-- Area untuk menampilkan laporan -->
-          <div id="reportDisplay" class="container report-display" style="display: none;">
-            <h5>Laporan Pelanggaran yang Dikirim</h5>
-            <p><strong>Nama:</strong> <span id="displayName"></span></p>
-            <p><strong>Tanggal Pelanggaran:</strong> <span id="displayDate"></span></p>
-            <p><strong>Deskripsi:</strong> <span id="displayDescription"></span></p>
-            <p><strong>Bukti Foto:</strong> <img id="displayProof" class="proof-img" src="" alt="Bukti Foto"></p>
-          </div> 
-        </body>
+        <!-- Area untuk menampilkan laporan -->
+        <div id="reportDisplay" class="container report-display" style="display: none;">
+          <h5>Laporan Pelanggaran yang Dikirim</h5>
+          <p><strong>Nomor Induk:</strong> <span id="displayNomor_Induk"></span></p>
+          <p><strong>Nama:</strong> <span id="displayName"></span></p>
+          <p><strong>Tanggal Pelanggaran:</strong> <span id="displayDate"></span></p>
+          <p><strong>Deskripsi Pelanggaran:</strong> <span id="displayDeskripsi_Pelanggaran"></span></p>
+          <p><strong>Bukti Foto:</strong> <img id="displayProof" class="proof-img" src="" alt="Bukti Foto"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Mengisi dropdown dengan data dari server
+      const descriptionDropdown = document.getElementById("deskripsi_pelanggaran");
+    
+      fetch('../backend/get_tatib_deskripsi.php') // Sesuaikan path ke endpoint
+        .then(response => response.json())
+        .then(result => {
+          if (result.status === "success") {
+            result.data.forEach(deskripsi_pelanggaran => {
+              const option = document.createElement("option");
+              option.value = deskripsi_pelanggaran;
+              option.textContent = deskripsi_pelanggaran;
+              descriptionDropdown.appendChild(option);
+            });
+          } else {
+            console.error("Gagal memuat data tata tertib:", result.message);
+          }
+        })
+        .catch(error => console.error("Terjadi kesalahan:", error));
+    });
+    
+    // Mengirimkan form menggunakan AJAX
+    document.getElementById("reportForm").addEventListener("submit", async function (event) {
+      event.preventDefault(); // Mencegah reload halaman
+      const formData = new FormData(this);
+    
+      try {
+        const response = await fetch(this.action, {
+          method: "POST",
+          body: formData
+        });
+    
+        const result = await response.json(); // Parsing JSON dari respons
+        if (response.ok && result.status === "success") {
+          document.getElementById("reportForm").style.display = "none";
+          // Tampilkan data yang dikirim
+          document.getElementById("displayNomor_Induk").textContent = result.data.NIM;
+          document.getElementById("displayName").textContent = result.data.name;
+          document.getElementById("displayDate").textContent = result.data.date;
+          document.getElementById("displayDeskripsi_Pelanggaran").textContent = result.data.description;
+          const proofURL = `../uploads/${result.data.proof}`; // URL file bukti
+          document.getElementById("displayProof").src = proofURL;
+    
+          document.getElementById("reportDisplay").style.display = "block"; // Tampilkan area laporan
+          alert(result.message); // Notifikasi sukses
+        } else {
+          alert("Gagal mengirim laporan. Pesan: " + result.message);
+        }
+      } catch (error) {
+        alert("Terjadi kesalahan saat mengirim laporan: " + error.message);
+      }
+    });
+  </script>
+</body>
+
 </html>

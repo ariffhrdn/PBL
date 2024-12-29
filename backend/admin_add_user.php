@@ -18,8 +18,8 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
         <h2 class="text-center">Tambah Pengguna Baru</h2>
         <form action="process_add_user.php" method="POST">
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" name="email" id="email" class="form-control" required>
+                <label for="username">Username:</label>
+                <input type="username" name="username" id="username" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>

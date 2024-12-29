@@ -14,14 +14,14 @@ if ($stmt === false) {
     exit;
 }
 
-$tataTertib = [];
+$TataTertib = [];
 while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
-    $tataTertib[] = $row['deskripsi_pelanggaran'];
+    $TataTertib[] = $row['deskripsi_pelanggaran'];
 }
 
 echo json_encode([
     'status' => 'success',
-    'data' => $tataTertib
+    'data' => $TataTertib
 ]);
 
 sqlsrv_close($conn);
