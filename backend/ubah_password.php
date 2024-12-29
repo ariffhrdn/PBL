@@ -5,12 +5,12 @@ require 'db.php';
 $data = json_decode(file_get_contents("php://input"), true);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $email = $data['email'];
+    $NIM = $data['NIM'];
     $newPassword = $data['newPassword'];
 
     // Periksa apakah email terdaftar
-    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
+    $stmt = $conn->prepare("SELECT * FROM users WHERE NIM = ?");
+    $stmt->bind_param("s", $NIM);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -18,8 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Email ditemukan, ubah kata sandi
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
-        $updateStmt = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
-        $updateStmt->bind_param("ss", $hashedPassword, $email);
+        $updateStmt = $conn->prepare("UPDATE users SET password = ? WHERE NIM = ?");
+        $updateStmt->bind_param("ss", $hashedPassword, $NIM);
 
         if ($updateStmt->execute()) {
             echo json_encode(["message" => "Kata sandi berhasil diperbarui."]);

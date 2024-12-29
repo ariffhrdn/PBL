@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Masuk</title>
+  <link rel="icon" type="image/png" href="../assets/img/logos/logopolinema.png">
+  <title>Login Page - Sistem Tata Tertib</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
   <style>
@@ -119,7 +120,7 @@
 
         // Alihkan berdasarkan role yang diterima
         if (data.role === 'admin') {
-          window.location.href = 'dashboard.html';
+          window.location.href = 'dashboard_admin.html';
         } else if (data.role === 'mahasiswa') {
           window.location.href = 'dashboard_mahasiswa.html';
         } else if (data.role === 'dosen') {

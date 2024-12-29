@@ -170,27 +170,30 @@ th:nth-child(4), td:nth-child(4) {
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', loadTataTertibFromLocalStorage);
+   document.addEventListener('DOMContentLoaded', loadTataTertibFromDatabase);
 
-    function loadTataTertibFromLocalStorage() {
-        const daftarTableBody = document.getElementById("daftar-tata-tertib-body");
-        daftarTableBody.innerHTML = ''; // Clear tabel sebelum memuat data
+function loadTataTertibFromDatabase() {
+    const daftarTableBody = document.getElementById("daftar-tata-tertib-body");
+    daftarTableBody.innerHTML = ''; // Clear tabel sebelum memuat data
 
-        // Ambil data dari localStorage
-        const savedTataTertibData = localStorage.getItem('tataTertibData');
-        if (savedTataTertibData) {
-            const tataTertibData = JSON.parse(savedTataTertibData);
-            tataTertibData.forEach((tataTertib, index) => {
+    // Ambil data dari file PHP
+    fetch('../backend/get_tata_tertib.php')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((tataTertib, index) => {
                 const newDaftarRow = document.createElement("tr");
                 newDaftarRow.innerHTML = `
                     <td>${index + 1}</td>
-                    <td>${tataTertib.deskripsiPelanggaran}</td>
-                    <td>${tataTertib.tingkatPelanggaran}</td>
+                    <td>${tataTertib.deskripsi_pelanggaran}</td>
+                    <td>${tataTertib.tingkat_pelanggaran}</td>
                 `;
                 daftarTableBody.appendChild(newDaftarRow);
             });
-        }
-    }
+        })
+        .catch(error => {
+            console.error("Error fetching tata tertib data: ", error);
+        });
+}
 </script>
     <!-- Scripts -->
   <script src="../assets/js/core/popper.min.js"></script>
